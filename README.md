@@ -29,10 +29,20 @@ import unittest
 
 class TestConfigParser(unittest.TestCase):
     
-    def test_get_config(self):
+    def test_get_config_using_string(self):
         read_me = ("[DEFAULT]\n"
                    "option1=Hello\n"
                    "option2=World\n")
+        test_parser = get_config(read_me)
+        self.assertEqual('Hello', test_parser.get('DEFAULT', 'option1')
+        
+    def test_get_config_using_dictionary(self):
+        read_me = {
+            'DEFAULT': {
+                'option1': 'Hello',
+                'option2': 'World',
+            }
+        }
         test_parser = get_config(read_me)
         self.assertEqual('Hello', test_parser.get('DEFAULT', 'option1')
 
