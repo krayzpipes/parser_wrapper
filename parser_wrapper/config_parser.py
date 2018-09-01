@@ -32,8 +32,6 @@ class ConfigParserWrapper(ConfigParser):
             return
         elif self._read_from_dict(config_item):
             return
-        elif self._read_from_file_object(config_item):
-            return
 
     def _read_normal(self, config_item_, encoding=None):
 
@@ -61,15 +59,6 @@ class ConfigParserWrapper(ConfigParser):
             super().read_dict(config_item_, source="DICT")
         except AttributeError:
             return False
-
-        if len(self['DEFAULT']) or self.sections():
-            return True
-        else:
-            return False
-
-    def _read_from_file_object(self, config_item_):
-
-        super().read_file(config_item_, source="FILE_OBJECT")
 
         if len(self['DEFAULT']) or self.sections():
             return True
